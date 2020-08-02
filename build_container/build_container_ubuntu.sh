@@ -10,7 +10,11 @@ apt-get update -y
 apt-get install -y --no-install-recommends software-properties-common apt-transport-https curl gpg-agent
 
 # gcc-9
-add-apt-repository -y ppa:ubuntu-toolchain-r/test
+# use Ubuntu standard respository on focal,
+# use PPA on other releases.
+if [ $(lsb_release -cs) != 'focal' ]; then
+    add-apt-repository -y ppa:ubuntu-toolchain-r/test
+fi
 apt-get update
 apt-get install -y --no-install-recommends g++-9
 update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 1000
