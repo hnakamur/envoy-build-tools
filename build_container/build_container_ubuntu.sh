@@ -28,19 +28,19 @@ curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | \
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
 case $ARCH in
     'ppc64le' )
-        add-apt-repository "deb [arch=ppc64le] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+        echo "deb [arch=ppc64le] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
         ;;
     'x86_64' )
-        add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+        echo "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
         ;;
     'aarch64' )
-        add-apt-repository "deb [arch=arm64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+        echo "deb [arch=arm64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
         ;;
 esac
 
 # CMake
 curl -fsSL https://apt.kitware.com/keys/kitware-archive-latest.asc | apt-key add -
-apt-add-repository "deb https://apt.kitware.com/ubuntu/ $(lsb_release -cs) main"
+echo "deb https://apt.kitware.com/ubuntu/ $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/cmake.list > /dev/null
 
 apt-get update -y
 
